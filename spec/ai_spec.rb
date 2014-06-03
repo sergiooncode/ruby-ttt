@@ -83,10 +83,19 @@ describe Ai do
     let(:board){ Board.new(9) }
     let(:ai){ described_class.new }
     it "board is empty" do
-      depth = 0
-      maximizing_player = true
-
       expect(ai.possible_moves(board)).to eql [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    end
+    it "board has only position board.squares[3] empty" do
+      board.squares[0] = 'X'
+      board.squares[1] = 'O'
+      board.squares[2] = 'X'
+      board.squares[4] = 'O'
+      board.squares[5] = 'X'
+      board.squares[6] = 'O'
+      board.squares[7] = 'X'
+      board.squares[8] = 'O'
+      
+      expect(ai.possible_moves(board)).to eql [3]
     end
   end
 end

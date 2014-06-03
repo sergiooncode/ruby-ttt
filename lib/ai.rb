@@ -34,7 +34,9 @@ class Ai
   def possible_moves(board)
     moves = []
     (0..board.size - 1).each do |x|
-      moves.push(x)
+      if board.empty?(x)
+        moves.push(x)
+      end
     end
     moves
   end
