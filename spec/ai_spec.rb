@@ -35,4 +35,15 @@ describe Ai do
 
     expect(ai.minimax(board, depth, maximizing_player)).to eql(0)
   end
+  it "human is current player and it won" do
+    board.squares[0] = 'X'
+    board.squares[1] = 'O'
+    board.squares[3] = 'X'
+    board.squares[5] = 'O'
+    board.squares[6] = 'X'
+    depth = 5
+    maximizing_player = true
+
+    expect(ai.minimax(board, depth, maximizing_player)).to eql(1000000)
+  end
 end
