@@ -13,7 +13,19 @@ class Ai
   def minimax(board, depth, maximizing_player)
     if @game_rules.gameover?(board)
       if !@game_rules.tie?(board)
-        score = INFINITY
+        if maximizing_player
+          if @game_rules.who_is_winner == 'X'
+            score = -INFINITY
+          else
+            score = INFINITY
+          end
+        else
+          if @game_rules.who_is_winner == 'X'
+            score = INFINITY
+          else
+            score = -INFINITY
+          end
+        end
       else
         score = 0
       end
