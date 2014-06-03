@@ -20,4 +20,19 @@ describe Ai do
 
     expect(ai.minimax(board, depth, maximizing_player)).to eql(1000000)
   end
+  it "machine is current player and it is a tie" do
+    board.squares[0] = 'X'
+    board.squares[1] = 'O'
+    board.squares[2] = 'X'
+    board.squares[3] = 'O'
+    board.squares[4] = 'X'
+    board.squares[5] = 'X'
+    board.squares[6] = 'O'
+    board.squares[7] = 'X'
+    board.squares[8] = 'O'
+    depth = 9
+    maximizing_player = true
+
+    expect(ai.minimax(board, depth, maximizing_player)).to eql(0)
+  end
 end
