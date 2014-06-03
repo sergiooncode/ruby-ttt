@@ -79,4 +79,14 @@ describe Ai do
       expect(ai.minimax(board, depth, maximizing_player)).to eql(-1000000)
     end
   end
+  context "when board is not in a terminal case" do
+    let(:board){ Board.new(9) }
+    let(:ai){ described_class.new }
+    it "board is empty" do
+      depth = 0
+      maximizing_player = true
+
+      expect(ai.possible_moves(board)).to eql [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    end
+  end
 end

@@ -31,6 +31,14 @@ class Ai
     score
   end
 
+  def possible_moves(board)
+    moves = []
+    (0..board.size - 1).each do |x|
+      moves.push(x)
+    end
+    moves
+  end
+
   def minimax(board, depth, maximizing_player)
     if @game_rules.gameover?(board)
       score = heuristic(board, maximizing_player)
