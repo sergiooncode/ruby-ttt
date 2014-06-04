@@ -6,27 +6,15 @@ describe Ai do
   context "when current player wins" do
     let(:board){ Board.new(9) }
     let(:ai){ described_class.new } 
-    it "machine is current player and it won" do
-      board.squares[0] = 'X'
-      board.squares[1] = 'O'
-      board.squares[2] = 'X'
-      board.squares[3] = 'X'
-      board.squares[4] = 'O'
-      board.squares[5] = '-'
-      board.squares[6] = '-'
-      board.squares[7] = 'O'
-      board.squares[8] = '-'
+    it "returns score when machine is current player and it won" do
+      board.squares = "XOXXO--O-"
       depth = 6
       maximizing_player = true
 
       expect(ai.minimax(board, depth, maximizing_player)).to eql(1000000)
     end
-    it "human is current player and it won" do
-      board.squares[0] = 'X'
-      board.squares[1] = 'O'
-      board.squares[3] = 'X'
-      board.squares[5] = 'O'
-      board.squares[6] = 'X'
+    it "returns score when human is current player and it won" do
+      board.squares = "XO-X-OX--"
       depth = 5
       maximizing_player = false
 
@@ -36,16 +24,8 @@ describe Ai do
   context "when it is tie" do
     let(:board){ Board.new(9) }
     let(:ai){ described_class.new }
-    it "machine is current player and it is a tie" do
-      board.squares[0] = 'X'
-      board.squares[1] = 'O'
-      board.squares[2] = 'X'
-      board.squares[3] = 'O'
-      board.squares[4] = 'X'
-      board.squares[5] = 'X'
-      board.squares[6] = 'O'
-      board.squares[7] = 'X'
-      board.squares[8] = 'O'
+    it "returns score when machine is current player and it is a tie" do
+      board.squares = "XOXOXXOXO"
       depth = 9
       maximizing_player = true
 
@@ -55,24 +35,15 @@ describe Ai do
   context "when current player loses" do
     let(:board){ Board.new(9) }
     let(:ai){ described_class.new }
-    it "machine is current player and it lost" do
-      board.squares[0] = 'X'
-      board.squares[1] = 'O'
-      board.squares[3] = 'X'
-      board.squares[5] = 'O'
-      board.squares[6] = 'X'
+    it "returns score when machine is current player and it lost" do
+      board.squares = "XO-X-OX--"
       depth = 5
       maximizing_player = true
 
       expect(ai.minimax(board, depth, maximizing_player)).to eql(-1000000)
     end
-    it "human is current player and it lost" do
-      board.squares[0] = 'X'
-      board.squares[1] = 'O'
-      board.squares[2] = 'X'
-      board.squares[3] = 'X'
-      board.squares[4] = 'O'
-      board.squares[7] = 'O'
+    it "returns score when human is current player and it lost" do
+      board.squares = "XOXXO--O-"
       depth = 6
       maximizing_player = false
       
@@ -82,18 +53,11 @@ describe Ai do
   context "when board is not in a terminal case" do
     let(:board){ Board.new(9) }
     let(:ai){ described_class.new }
-    it "board is empty" do
+    it "generates array of possible moves when board is empty" do
       expect(ai.possible_moves(board)).to eql [0, 1, 2, 3, 4, 5, 6, 7, 8]
     end
-    it "board has only position board.squares[3] empty" do
-      board.squares[0] = 'X'
-      board.squares[1] = 'O'
-      board.squares[2] = 'X'
-      board.squares[4] = 'O'
-      board.squares[5] = 'X'
-      board.squares[6] = 'O'
-      board.squares[7] = 'X'
-      board.squares[8] = 'O'
+    it "generates array of possible moves when board has only position board.squares[3] empty" do
+      board.squares = "XOX-OXOXO" 
       
       expect(ai.possible_moves(board)).to eql [3]
     end
