@@ -15,49 +15,34 @@ class Game
     @cli = Cli.new
   end
   def start
-    @cli.welcome
-    @cli.announce_players_tokens
-    puts
+    cli.welcome
+    cli.announce_players_tokens
   end
   def ask_human_for_move
-    puts "Please human enter next move:"
-    @human_player.move(@board)
+    cli.ask_human
+    human_player.move(board)
   end
   def ask_machine_for_move
-    puts "Machine is thinking next move..."
-    @machine_player.move(@board)
-  end
-  def make_move(position)
-    token = player.get_token
-    @player.move(@board, position, token).squares
-  end
+    cli.display_machine_thinking
+    machine_player.move(board)
+  end 
   def run
-    while !game_rules.gameover?(@board)
-      @board = ask_human_for_move
-      show_board
-      if game_rules.gameover?(@board)
+    while !game_rules.gameover?(board)
+      board = ask_human_for_move
+      cli.display(board)
+      if game_rules.gameover?(board)
         break 
       end
-      @board = ask_machine_for_move
-      show_board
+      board = ask_machine_for_move
+      cli.display(board)
     end
-    show_board
+    cli.display(board)
   end
   def finish
-    if @game_rules.winner?(@board)
-      puts "Player #{@game_rules.who_is_winner} won."
+    if game_rules.winner?(board)
+      cli.announce(game_rules.who_is_winner)
     else
-      puts "It was a tie."
+      cli.announce_tie
     end
-  end
-  def show_board
-    puts
-    (0..2).each do |i|
-      (0..2).each do |k|
-        print "#{@board.squares[k + 3*i]} "
-      end
-      puts
-    end
-    puts
   end
 end
