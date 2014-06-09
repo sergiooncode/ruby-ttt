@@ -31,6 +31,13 @@ describe Ai do
 
       expect(ai.minimax(board, depth, maximizing_player)).to eql 0
     end
+    it "returns score when machine is current player and it is a tie" do
+      board.squares = "XOXOXXOXO"
+      depth = 9
+      maximizing_player = false
+
+      expect(ai.minimax(board, depth, maximizing_player)).to eql 0
+    end
   end
   context "when current player loses" do
     let(:board){ Board.new(9) }
