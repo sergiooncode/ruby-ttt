@@ -2,17 +2,16 @@ require 'board'
 require 'human_player'
 require 'game_rules'
 require 'machine_player'
-require 'cli'
 
 class Game
   attr_accessor :cli, :board, :human_player, :machine_player, :game_rules
 
-  def initialize
+  def initialize(cli)
     @board = Board.new(9)
     @human_player = HumanPlayer.new('X')
     @machine_player = MachinePlayer.new('O')
     @game_rules = GameRules.new
-    @cli = Cli.new
+    @cli = cli
   end
   def start
     cli.welcome

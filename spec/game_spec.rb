@@ -2,7 +2,8 @@ require 'game'
 
 describe Game do
   context "when new game created" do
-    let(:game){ described_class.new }
+    let(:cli){ Cli.new }
+    let(:game){ described_class.new(cli) }
     it "has a board" do
       expect(game.board).not_to be_nil
     end
@@ -14,7 +15,8 @@ describe Game do
     end
   end
   context "while game is ongoing" do
-    let(:game){ described_class.new }
+    let(:cli){ Cli.new }
+    let(:game){ described_class.new(cli) }
     it "runs the game" do
       expect(game).to receive(:run)
 
