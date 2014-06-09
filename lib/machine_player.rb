@@ -1,15 +1,17 @@
+require 'ai'
+require 'board'
+
 class MachinePlayer 
-  attr_accessor :token
+  attr_accessor :token, :ai
 
   def initialize(token)
     @token = token
+    @ai = Ai.new
   end
   def move(board)
-    index = Random.rand(9)
-    while !board.empty?(index)
-      index = Random.rand(9)
-    end
-    board.squares[index] = @token 
+    score = ai.minimax(board, 1, true)
+    index = ai.smart_move
+    board.squares[index] = token
     board
   end
 end
