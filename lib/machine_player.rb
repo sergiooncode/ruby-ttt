@@ -1,5 +1,4 @@
 require 'ai'
-require 'board'
 
 class MachinePlayer 
   attr_accessor :token, :ai
@@ -9,7 +8,7 @@ class MachinePlayer
     @ai = Ai.new
   end
   def move(board)
-    score = ai.minimax(board, 1, true)
+    ai.minimax(board, 1, true)
     index = ai.smart_move
     board.squares[index] = token
     board

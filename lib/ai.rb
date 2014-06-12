@@ -23,15 +23,9 @@ class Ai
     end
     score
   end
-
+  
   def possible_moves(board)
-    moves = []
-    (0..board.size - 1).each do |x|
-      if board.empty?(x)
-        moves.push(x)
-      end
-    end
-    moves
+       (0..board.size - 1).select{ |move| board.empty?(move) }
   end
 
   def board_with_new_move(old_board, move, token)

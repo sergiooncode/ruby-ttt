@@ -13,6 +13,13 @@ class Game
     @game_rules = GameRules.new
     @cli = cli
   end
+
+  def play
+    start
+    run
+    finish
+  end
+
   def start
     cli.welcome
     cli.announce_players_tokens
